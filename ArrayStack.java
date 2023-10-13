@@ -1,63 +1,51 @@
 public class ArrayStack {
-  private Object[] array;
-  private int size;
+	private int[] theStack;
+	private int maxSize;
+	private int top;
 
-  public ArrayStack(int capacity) {
-    array = new Object[capacity];
-    size = 0;
-  }
+	public ArrayStack(int s) {
+		maxSize = s;
+		theStack = new int[maxSize];
+		top = -1;
+	}
 
-  public void push(Object item) {
-    if (size == array.length) {
-      // Handle full stack (you can resize the array here if needed)
-    }
-    array[size++] = item;
-  }
+	public void push(int elem) {
+		top++;
+		theStack[top] = elem;
+	}
 
-  public Object pop() {
-    if (isEmpty()) {
-      // Handle empty stack
-      return null;
-    }
-    return array[--size];
-  }
+	public int pop() {
+		int result = theStack[top];
+		top--;
+		return result;
+	}
 
-  public Object top() {
-    if (isEmpty()) {
-        // Handle empty stack
-        return null;
-    }
-    return array[size - 1];
-  }
+	public int top() {
+		return theStack[top];
+	}
 
-  public boolean isEmpty() {
-    return size == 0;
-  }
+	public boolean isFull() {
+		return (top == (maxSize - 1));
+	}
 
-  public boolean isFull() {
-    return size == array.length;
-  }
+	public boolean isEmpty() {
+		return (top == -1);
+	}
 
-  public int size() {
-    return size;
-  }
+	public int size() {
+		return (top + 1);
+	}
 
-  public void removeNth(int n) {
-    if (n < 1 || n > size) {
-      throw new IllegalArgumentException("Invalid value of n");
-    }
+	public void printStack() {
+		if (top == -1)
+			System.out.println("Stack is empty!!\n");
+		else {
+			System.out.println(theStack[top] + " <- top");
+			for (int i = top - 1; i >= 0; i--)
+				System.out.println(theStack[i]);
+			System.out.println();
+		}
+	}
 
-    Object[] tempArray = new Object[array.length];
 
-    for (int i = 0; i < n - 1; i++) {
-      tempArray[i] = array[i];
-    }
-
-    for (int i = n; i < size; i++) {
-      tempArray[i - 1] = array[i];
-    }
-
-    array = tempArray;
-    size--;
-  }
 }
