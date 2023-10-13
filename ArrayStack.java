@@ -2,6 +2,7 @@ public class ArrayStack {
 	private int[] theStack;
 	private int maxSize;
 	private int top;
+	public int length;
 
 	public ArrayStack(int s) {
 		maxSize = s;
